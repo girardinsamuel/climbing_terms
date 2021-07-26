@@ -3,7 +3,7 @@
     <h1 class="font-medium text-lg mb-2">{{ result.title }}</h1>
     <div class="flex items-center space-x-4">
       <div class="text-gray-500 text-base flex items-center" v-for="(trans, lang) in result.translations" :key="lang">
-        <img :src="`/public/flags/${lang}.png`" class="h-4 w-4 mr-2">
+        <img :src="`/flags/${lang}.png`" class="h-4 w-4 mr-2">
         <span>{{ trans }}</span>
       </div>
     </div>
