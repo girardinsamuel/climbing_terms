@@ -59,7 +59,7 @@ export default {
       fuse: null,
       dictionary,
       results: [],
-      lang: 'en'
+      lang: null,
     }
   },
   created () {
@@ -69,6 +69,8 @@ export default {
     }
 
     this.fuse = new Fuse(dictionary, options)
+
+    this.lang = localStorage.selectedLang || 'en'
   },
   methods: {
     search (event) {
@@ -77,6 +79,7 @@ export default {
     },
     selectLang (lang) {
       this.lang = lang
+      localStorage.selectedLang = lang;
     },
     displayResult (fuseResult) {
       const result = fuseResult.item
