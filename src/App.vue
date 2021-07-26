@@ -1,25 +1,28 @@
 <template>
-  <div class="flex flex-col min-h-screen pt-10 p-4 bg-pattern items-center">
+  <div
+    class="flex flex-col min-h-screen pt-10 p-4 items-center"
+    :class="mode == 'dark' ? 'bg-pattern-dark' : 'bg-pattern'"
+  >
     <!-- Lang selector -->
     <nav class="flex space-x-4 mb-4" aria-label="Langs">
       <!-- Current: "bg-indigo-100 text-indigo-700", Default: "text-gray-500 hover:text-gray-700" -->
       <a @click="selectLang('en')"
         class="px-3 py-2 font-medium text-sm rounded-md cursor-pointer"
-        :class="lang == 'en' ? 'bg-yellow-100 text-yellow-700' : 'text-black hover:bg-yellow-100 hover:text-yellow-700'"
+        :class="lang == 'en' ? 'bg-yellow-100 text-yellow-700' : 'dark:text-white text-black hover:bg-yellow-100 hover:text-yellow-700 dark:hover:text-yellow-700'"
       >
         English
       </a>
       <a
         @click="selectLang('it')"
         class="px-3 py-2 font-medium text-sm rounded-md cursor-pointer"
-        :class="lang == 'it' ? 'bg-yellow-100 text-yellow-700' : 'text-black hover:bg-yellow-100 hover:text-yellow-700'"
+        :class="lang == 'it' ? 'bg-yellow-100 text-yellow-700' : 'dark:text-white text-black hover:bg-yellow-100 hover:text-yellow-700 dark:hover:text-yellow-700'"
       >
         Italian
       </a>
       <a
         @click="selectLang('fr')"
         class="px-3 py-2 font-medium text-sm rounded-md cursor-pointer"
-        :class="lang == 'fr' ? 'bg-yellow-100 text-yellow-700' : 'text-black hover:bg-yellow-100 hover:text-yellow-700'"
+        :class="lang == 'fr' ? 'bg-yellow-100 text-yellow-700' : 'dark:text-white text-black hover:bg-yellow-100 hover:text-yellow-700 dark:hover:text-yellow-700'"
       >
         French
       </a>
@@ -34,7 +37,7 @@
           </svg>
         </div>
         <input @input="search" type="text" name="search" id="search"
-        class="focus:ring-yellow-700 focus:border-yellow-700 block w-full pl-10 sm:text-sm border-yellow-500 rounded-md" placeholder="Search climbing term ..." autocomplete="off">
+        class="dark:bg-gray-600 dark:text-white text-black bg-white focus:ring-yellow-700 focus:border-yellow-700 block w-full pl-10 sm:text-sm border-yellow-500 rounded-md" placeholder="Search climbing term ..." autocomplete="off">
       </div>
     </div>
     <!-- Results -->
@@ -47,8 +50,8 @@
     <!-- Eventual search history -->
     <div v-if="history.length > 0" class="my-10 w-full px-0 sm:px-10 z-10">
       <div class="flex items-center justify-between">
-        <h2 class="text-black text-md text-left mb-2 ">Recent searchs</h2>
-        <a @click="clearHistory" class="text-yellow-700 cursor-pointer underline hover:text-yellow-900">clear</a>
+        <h2 class="dark:text-white text-black text-md text-left mb-2 font-medium">Recent searchs</h2>
+        <a @click="clearHistory" class="dark:text-yellow-200 text-yellow-700 cursor-pointer underline dark:hover:text-yellow-600 hover:text-yellow-900">clear</a>
       </div>
       <ul class="w-full z-10">
         <li v-for="result in history" :key="result.title" class="mb-2">
@@ -58,9 +61,14 @@
     </div>
 
     <!-- Footer -->
-    <div class="fixed bottom-4 inset-x-0 text-center text-sm flex justify-center items-center space-x-2">
-      <span>Crafted by <a href="https://twitter.com/girardin_sam" class="text-yellow-700 underline hover:text-yellow-900">Samuel Girardin</a></span>
-      <a href="https://github.com/girardinsamuel/climbing_terms"><svg width="24" height="24" fill="currentColor" class="text-yellow-700 hover:text-yellow-900"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.463 2 11.97c0 4.404 2.865 8.14 6.839 9.458.5.092.682-.216.682-.48 0-.236-.008-.864-.013-1.695-2.782.602-3.369-1.337-3.369-1.337-.454-1.151-1.11-1.458-1.11-1.458-.908-.618.069-.606.069-.606 1.003.07 1.531 1.027 1.531 1.027.892 1.524 2.341 1.084 2.91.828.092-.643.35-1.083.636-1.332-2.22-.251-4.555-1.107-4.555-4.927 0-1.088.39-1.979 1.029-2.675-.103-.252-.446-1.266.098-2.638 0 0 .84-.268 2.75 1.022A9.606 9.606 0 0112 6.82c.85.004 1.705.114 2.504.336 1.909-1.29 2.747-1.022 2.747-1.022.546 1.372.202 2.386.1 2.638.64.696 1.028 1.587 1.028 2.675 0 3.83-2.339 4.673-4.566 4.92.359.307.678.915.678 1.846 0 1.332-.012 2.407-.012 2.734 0 .267.18.577.688.48C19.137 20.107 22 16.373 22 11.969 22 6.463 17.522 2 12 2z"></path></svg></a>
+    <div class="fixed bottom-4 inset-x-0 text-center text-sm flex justify-center items-center space-x-2 dark:text-white text-black">
+      <span>Crafted by <a href="https://twitter.com/girardin_sam" class="dark:text-yellow-200 text-yellow-700 underline dark:hover:text-yellow-600 hover:text-yellow-900">Samuel Girardin</a></span>
+      <a href="https://github.com/girardinsamuel/climbing_terms"><svg width="24" height="24" fill="currentColor" class="dark:text-yellow-200 text-yellow-700 dark:hover:text-yellow-600 hover:text-yellow-900"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.463 2 11.97c0 4.404 2.865 8.14 6.839 9.458.5.092.682-.216.682-.48 0-.236-.008-.864-.013-1.695-2.782.602-3.369-1.337-3.369-1.337-.454-1.151-1.11-1.458-1.11-1.458-.908-.618.069-.606.069-.606 1.003.07 1.531 1.027 1.531 1.027.892 1.524 2.341 1.084 2.91.828.092-.643.35-1.083.636-1.332-2.22-.251-4.555-1.107-4.555-4.927 0-1.088.39-1.979 1.029-2.675-.103-.252-.446-1.266.098-2.638 0 0 .84-.268 2.75 1.022A9.606 9.606 0 0112 6.82c.85.004 1.705.114 2.504.336 1.909-1.29 2.747-1.022 2.747-1.022.546 1.372.202 2.386.1 2.638.64.696 1.028 1.587 1.028 2.675 0 3.83-2.339 4.673-4.566 4.92.359.307.678.915.678 1.846 0 1.332-.012 2.407-.012 2.734 0 .267.18.577.688.48C19.137 20.107 22 16.373 22 11.969 22 6.463 17.522 2 12 2z"></path></svg></a>
+      <span @click="toggleMode">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="dark:text-yellow-200 text-yellow-700 dark:hover:text-yellow-600 hover:text-yellow-900 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      </span>
     </div>
   </div>
 </template>
@@ -82,6 +90,7 @@ export default {
       results: [],
       history: [],
       lang: null,
+      mode: null,
     }
   },
   created () {
@@ -94,6 +103,15 @@ export default {
     // load from storage
     this.lang = localStorage.selectedLang || 'en'
     this.history = JSON.parse(localStorage.history || "[]") || []
+    if (localStorage.theme === 'dark' || (!('theme' in window.localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark')
+      localStorage.theme = 'dark'
+      this.mode = "dark"
+    } else {
+      document.documentElement.classList.remove('dark')
+      localStorage.theme = 'light'
+      this.mode = "light"
+    }
   },
   beforeMount() {
     window.addEventListener("beforeunload", this.saveDataInHistory)
@@ -141,6 +159,17 @@ export default {
     saveDataInHistory() {
       localStorage.history = JSON.stringify(this.history)
     },
+    toggleMode () {
+      if (this.mode == "dark") {
+        this.mode = "light"
+        document.documentElement.classList.remove('dark')
+        localStorage.theme = "light"
+      } else {
+        this.mode = "dark"
+        document.documentElement.classList.add('dark')
+        localStorage.theme = "dark"
+      }
+    }
   },
 }
 </script>
