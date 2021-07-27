@@ -3,7 +3,7 @@
     class="flex flex-col min-h-screen pt-10 p-4 items-center justify-between"
     :class="mode == 'dark' ? 'bg-pattern-dark' : 'bg-pattern'"
   >
-    <div>
+    <div class="w-full">
       <!-- Lang selector -->
       <nav class="flex space-x-4 mb-4" aria-label="Langs">
         <!-- Current: "bg-indigo-100 text-indigo-700", Default: "text-gray-500 hover:text-gray-700" -->
