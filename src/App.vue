@@ -5,7 +5,7 @@
   >
     <div class="w-full">
       <!-- Lang selector -->
-      <nav class="flex space-x-4 mb-4" aria-label="Langs">
+      <nav class="flex space-x-4 mb-4 mx-auto" aria-label="Langs">
         <!-- Current: "bg-indigo-100 text-indigo-700", Default: "text-gray-500 hover:text-gray-700" -->
         <a @click="selectLang('en')"
           class="px-3 py-2 font-medium text-sm rounded-md cursor-pointer"
